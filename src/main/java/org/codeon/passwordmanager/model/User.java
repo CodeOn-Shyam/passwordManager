@@ -1,11 +1,11 @@
 package org.codeon.passwordmanager.model;
- import jakatra.persistance.*;
+import jakarta.persistence.*;
 
  @Entity
  @Table(name = "users")
  public class User{
      @Id
-     @GeneratedValue(strategy = GenerationType.IDENTTY)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
 
      @Column(unique = true,nullable = false)

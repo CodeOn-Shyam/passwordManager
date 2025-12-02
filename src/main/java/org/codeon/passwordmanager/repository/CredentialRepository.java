@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CredentialRepository extends JpaRepository<Credential, Long> {
-    List<Credential> findByServiceNameContainingIgnoreCase(String serviceName);
+    List<Credential> findByServicenameContainingIgnoreCase(String servicename);
 }
