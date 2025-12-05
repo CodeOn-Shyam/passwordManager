@@ -35,7 +35,14 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService)
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/h2-console/**").permitAll()
+                        .requestMatchers(
+                                "/", "/index.html",
+                                "/login.html", "/register.html",
+                                "/dashboard.html", "/security.html", "/recovery.html",
+                                "/css/**", "/js/**",
+                                "/auth/**",
+                                "/h2-console/**"
+                        ).permitAll()
                         .requestMatchers("/api/credentials/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )

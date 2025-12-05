@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login – PawwordEX</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <h1>PawwordEX</h1>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/register.html">Register</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Login</h2>
+        <div class="row">
+            <div>
+                <label>Username</label>
+                <input id="loginUsername" placeholder="shyam">
+            </div>
+            <div>
+                <label>Password</label>
+                <input id="loginPassword" type="password" placeholder="••••••••">
+            </div>
+        </div>
+        <button id="loginBtn">Login</button>
+        <div id="loginStatus" class="status"></div>
+
+        <p class="hint">
+            Forgot your password or vault key?
+            <a href="/recovery.html">Go to recovery page</a>.
+        </p>
+    </div>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/login.js"></script>
+</body>
+</html>

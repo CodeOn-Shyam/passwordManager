@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard – PawwordEX</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <h1>PawwordEX</h1>
+        <div class="nav-links">
+            <span id="userBadge" class="badge"></span>
+            <a href="/security.html">Security</a>
+            <a href="/recovery.html">Recovery</a>
+            <a href="#" id="logoutLink">Logout</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Add Credential</h2>
+        <div class="row">
+            <div>
+                <label>Service Name</label>
+                <input id="credService" placeholder="Gmail">
+            </div>
+            <div>
+                <label>Login Username / Email</label>
+                <input id="credUser" placeholder="shyam@example.com">
+            </div>
+        </div>
+        <label>Password</label>
+        <input id="credPass" type="password" placeholder="service password">
+        <label>Note</label>
+        <input id="credNote" placeholder="Optional note">
+        <button id="addCredBtn">Save Credential</button>
+        <div id="addCredStatus" class="status"></div>
+    </div>
+
+    <div class="card">
+        <div class="header-row">
+            <h2>Your Credentials</h2>
+            <button id="reloadBtn" class="secondary">Refresh</button>
+        </div>
+        <div id="listStatus" class="status"></div>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Service</th>
+                <th>Username</th>
+                <th>Note</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="credTbody"></tbody>
+        </table>
+    </div>
+
+    <div class="card" id="decryptCard" style="display:none;">
+        <h2>Decrypted Password</h2>
+        <p><span class="pill" id="decryptMeta"></span></p>
+        <div id="decryptPassword" class="password-plaintext"></div>
+        <div class="status">⚠️ Make sure nobody is looking at your screen.</div>
+    </div>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

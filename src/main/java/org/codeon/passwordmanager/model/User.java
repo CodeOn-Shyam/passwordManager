@@ -18,6 +18,9 @@ import jakarta.persistence.*;
      @Column(nullable = false)
      private Role role;
 
+     private String vaultKeyHash;
+     private String recoveryQuestion;
+     private String recoveryAnswerHash;
      public User() {}
      public User(String username,String password,Role role){
          this.username = username;
@@ -51,5 +54,28 @@ import jakarta.persistence.*;
 
      public void setRole(Role role) {
          this.role = role;
+     }
+
+     public String getVaultKeyHash() {
+         return vaultKeyHash;
+     }
+     public void setVaultKeyHash(String vaultKeyHash) {
+         this.vaultKeyHash = vaultKeyHash;
+     }
+
+     public String getRecoveryQuestion() {
+         return recoveryQuestion;
+     }
+
+     public void setRecoveryQuestion(String recoveryQuestion) {
+         this.recoveryQuestion = recoveryQuestion;
+     }
+
+     public String getRecoveryAnswerHash() {
+         return recoveryAnswerHash;
+     }
+
+     public void setRecoveryAnswerHash(String recoveryAnswerHash) {
+         this.recoveryAnswerHash = recoveryAnswerHash;
      }
  }

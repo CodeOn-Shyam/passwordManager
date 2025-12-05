@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
 
 @Service
@@ -18,11 +18,13 @@ public class CredentialService {
 
     private final CredentialRepository credentialRepository;
     private final UserRepository userRepository;
-
+    private final PasswordEncoder passwordEncoder;
     public CredentialService(CredentialRepository credentialRepository,
-                             UserRepository userRepository) {
+                             UserRepository userRepository,
+                             PasswordEncoder passwordEncoder) {
         this.credentialRepository = credentialRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     private User getCurrentUser() {
@@ -56,7 +58,6 @@ public class CredentialService {
             );
         }
     }
-
     public List<Credential> getAllForCurrentUser() {
         User currentUser = getCurrentUser();
         return credentialRepository.findAll().stream()
@@ -65,7 +66,7 @@ public class CredentialService {
     }
     public Credential updateCredential(Long id,String servicename,String username,String password,String note){
         User user = getCurrentUser();
-        Credential credential = credentialRepository.findById(id).orElseThrow(()-> throw new ResponseStatusException(HttpStatus.NOT_FOUND,"credential not found"));
+        Credential credential = credentialRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"credential not found"));
         if(credential.getOwner() == null || !credential.getOwner().getId().equals(user.getId())){
             throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Acces Denied");
         }
@@ -80,14 +81,35 @@ public class CredentialService {
     }
     public void deleteCredential(Long id){
         User currentUser = getCurrentUser();
-        Credential credential = credentialReposirory.findById().orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Credential not forund"));
+        Credential credential = credentialRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Credential not forund"));
         if(credential.getOwner()==null|| !credential.getOwner().getId().equals(currentUser.getId())){
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Acces dened for the credential");
         }
-        return credentialRepository.delete(credential);
+        credentialRepository.delete(credential);
     }
-    public String decryptPassword(Long credentialId) {
+    public String decryptPassword(Long credentialId, String vaultKey) {
         User currentUser = getCurrentUser();
+
+        if (currentUser.getVaultKeyHash() == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Vault key not set for this user"
+            );
+        }
+
+        if (vaultKey == null || vaultKey.isBlank()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Vault key is required"
+            );
+        }
+
+        if (!passwordEncoder.matches(vaultKey, currentUser.getVaultKeyHash())) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "Invalid vault key"
+            );
+        }
 
         Credential credential = credentialRepository.findById(credentialId)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -113,4 +135,5 @@ public class CredentialService {
             );
         }
     }
+
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recovery – PawwordEX</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <h1>PawwordEX</h1>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/login.html">Login</a>
+            <a href="/register.html">Register</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Forgot Login Password</h2>
+        <p class="hint">
+            Use your username and recovery answer to reset your login password.
+        </p>
+        <label>Username</label>
+        <input id="fpUsername" placeholder="shyam">
+        <label>Recovery Answer</label>
+        <input id="fpAnswer" placeholder="Sravan sir">
+        <label>New Login Password</label>
+        <input id="fpNewPass" type="password" placeholder="new login password">
+        <button id="fpBtn">Reset Password</button>
+        <div id="fpStatus" class="status"></div>
+    </div>
+
+    <div class="card">
+        <h2>Forgot Vault Key</h2>
+        <p class="hint">
+            Use your username and recovery answer to set a new vault key.
+        </p>
+        <label>Username</label>
+        <input id="fvUsername" placeholder="shyam">
+        <label>Recovery Answer</label>
+        <input id="fvAnswer" placeholder="Sravan sir">
+        <label>New Vault Key</label>
+        <input id="fvNewKey" type="password" placeholder="new vault key">
+        <button id="fvBtn">Reset Vault Key</button>
+        <div id="fvStatus" class="status"></div>
+    </div>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/recovery.js"></script>
+</body>
+</html>

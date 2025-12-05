@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Security – PawwordEX</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <h1>PawwordEX</h1>
+        <div class="nav-links">
+            <span id="userBadge" class="badge"></span>
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/recovery.html">Recovery</a>
+            <a href="#" id="logoutLink">Logout</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Vault Key</h2>
+        <p class="hint">
+            The vault key is required every time you reveal a stored password.
+            It is stored as a hash, similar to your login password.
+        </p>
+        <div class="row">
+            <div>
+                <label>New Vault Key</label>
+                <input id="vaultKey" type="password" placeholder="vault-1234">
+            </div>
+            <div>
+                <label>Current Login Password</label>
+                <input id="vaultCurPass" type="password" placeholder="your login password">
+            </div>
+        </div>
+        <button id="vaultKeyBtn">Set / Update Vault Key</button>
+        <div id="vaultKeyStatus" class="status"></div>
+    </div>
+
+    <div class="card">
+        <h2>Recovery Information</h2>
+        <p class="hint">
+            Recovery question and answer are used to reset your login password or vault key
+            if you forget them. Choose something only you would know.
+        </p>
+        <label>Recovery Question</label>
+        <input id="recQuestion" placeholder="Your favourite teacher?">
+        <label>Recovery Answer</label>
+        <input id="recAnswer" placeholder="Sravan sir">
+        <label>Current Login Password</label>
+        <input id="recCurPass" type="password" placeholder="your login password">
+        <button id="recInfoBtn">Set / Update Recovery Info</button>
+        <div id="recInfoStatus" class="status"></div>
+    </div>
+
+    <div class="card">
+        <h2>Change Login Password</h2>
+        <p class="hint">
+            This changes the password you use to log in. You will need to use the new password
+            for all future logins.
+        </p>
+        <label>Current Password</label>
+        <input id="cpCurPass" type="password">
+        <label>New Password</label>
+        <input id="cpNewPass" type="password">
+        <button id="cpBtn">Change Password</button>
+        <div id="cpStatus" class="status"></div>
+    </div>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/security.js"></script>
+</body>
+</html>
